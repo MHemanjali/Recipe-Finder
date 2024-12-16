@@ -1,0 +1,21 @@
+
+recipes = {
+    "Pasta": ["tomato", "onion", "garlic", "pasta"],
+    "Salad": ["lettuce", "tomato", "cucumber", "olive oil"],
+    "Pizza": ["flour", "cheese", "tomato", "yeast"],
+}
+with open("multiple.txt", "r") as file:
+    lines = file.readlines()
+for i, line in enumerate(lines, 1):
+    available_ingredients = [ingredient.strip().lower() for ingredient in line.split(",")]
+    print(f"\nFor ingredient set {i}: {available_ingredients}")
+    matching_recipes = []
+    for recipe, ingredients in recipes.items():
+        if all(item in available_ingredients for item in ingredients):
+            matching_recipes.append(recipe)
+    if matching_recipes:
+        print("Recipes you can make:")
+        for recipe in matching_recipes:
+            print(f"- {recipe}")
+    else:
+        print("No recipes found with the available ingredients.")
